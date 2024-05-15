@@ -16,6 +16,7 @@ module.exports = {
           '@constants': './src/shared/constants',
           '@libraries': './src/shared/libraries',
           '@features': './src/features',
+          '@navigation': './src/navigation',
         },
       },
     ],
