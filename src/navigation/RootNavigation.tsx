@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import PaymentDetails from '@src/features/payment-details/presentation/PaymentDetails';
+import PaymentDetails from '@features/payment-details/presentation/PaymentDetails';
 
 const Stack = createNativeStackNavigator();
 

@@ -12,8 +12,7 @@
       "@constants": ["src/shared/constants"],
       "@libraries": ["src/shared/libraries"],
       "@utils": ["src/shared/utils"],
-      "@features/*": ["src/app/features/*"],
-      "@src/*": ["src/*"]
+      "@features/*": ["src/features/*"]
     }
   }
 }
