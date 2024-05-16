@@ -6,40 +6,72 @@ interface Step {
   step: number | string;
   menu: string;
   color: string;
+  menuColor: string;
   backgroundColor: string;
 }
 
-const Step = ({step, menu, color, backgroundColor}: Step) => {
+const Step = ({step, menu, color, menuColor, backgroundColor}: Step) => {
   return (
     <View style={styles.indicator}>
-      <View style={styles.stepIndicator}>
-        <Text
-          style={StyleSheet.flatten([
-            styles.stepNumber,
-            {color, backgroundColor},
-          ])}>
+      <View
+        style={StyleSheet.flatten([styles.stepIndicator, {backgroundColor}])}>
+        <Text style={StyleSheet.flatten([styles.stepNumber, {color}])}>
           {step}
         </Text>
       </View>
       <View>
-        <Text>{menu}</Text>
+        <Text style={{color: menuColor}}>{menu}</Text>
       </View>
     </View>
   );
 };
 
-const renderStep = ({step, menu, currentStep}) => {
+function getColor(step: number, currentStep: number) {
+  if (step === currentStep) {
+    return {
+      color: Colors.primary,
+      textColor: Colors.white,
+      menuColor: Colors.black,
+    };
+  }
+
+  if (step < currentStep) {
+    return {
+      color: Colors.primary,
+      textColor: Colors.gray,
+      menuColor: Colors.black,
+    };
+  }
+
+  return {
+    color: Colors.gray,
+    textColor: Colors.white,
+    menuColor: Colors.gray,
+  };
+}
+
+const renderStep = ({
+  step,
+  menu,
+  currentStep,
+}: {
+  step: number;
+  menu: string;
+  currentStep: number;
+}) => {
+  const {color, textColor, menuColor} = getColor(step, currentStep);
   return (
     <Step
       step={step}
       menu={menu}
-      color={Colors.white}
-      backgroundColor={Colors.primary}
+      color={textColor}
+      menuColor={menuColor}
+      backgroundColor={color}
     />
   );
 };
 
-export const Stepper = ({currentStep}) => {
+export const Stepper = ({currentStep}: {currentStep: number}) => {
   return (
     <View style={styles.container}>
       <View style={styles.indicator}>

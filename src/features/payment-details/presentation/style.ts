@@ -50,6 +50,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  refundContainer: {
+    alignItems: 'flex-end',
+  },
+  refundContent: {
+    marginTop: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  refundIcon: {
+    width: 18,
+    height: 18,
+    marginRight: 10,
+  },
+  refundText: {
+    fontSize: 12,
+    color: 'orange',
+  },
   detailOrderBookTitle: {
     fontSize: 14,
     fontWeight: '600',
@@ -84,10 +101,39 @@ const styles = StyleSheet.create({
     color: Colors.gray,
   },
   editText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
     color: Colors.primary,
     textDecorationLine: 'underline',
+  },
+  radioContainer: {
+    marginTop: 12,
+  },
+  visitorContainer: {
+    marginTop: 12,
+    flexDirection: 'column',
+  },
+  listVisitor: {
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: Colors.gray,
+  },
+  visitorText: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  editVisitor: {
+    marginTop: 10,
+    alignItems: 'flex-end',
+  },
+  listImage: {
+    width: 22,
+    height: 22,
+    marginRight: 10,
   },
 });
 
