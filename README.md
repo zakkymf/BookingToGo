@@ -21,3 +21,9 @@ yarn ios // for running iOS
 - [Zustand](https://github.com/pmndrs/zustand)
 
  
+## Demo
+
+| Android | iOS |
+| -------- | -------- |
+| ![](https://github.com/zakkymf/BookingToGo/blob/main/demo/android_1.png)    | ![](https://github.com/zakkymf/BookingToGo/blob/main/demo/ios_1.png)    |
+| ![](https://github.com/zakkymf/BookingToGo/blob/main/demo/android_2.png)    | ![](https://github.com/zakkymf/BookingToGo/blob/main/demo/ios_2.png)    |
