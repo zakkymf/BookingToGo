@@ -1,18 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback} from 'react';
-import {View, Text, Pressable, FlatList, Image} from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  FlatList,
+  Image,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
 import styles from './style';
 import {Radio, Stepper} from '@components';
 import {usePaymentDetail} from './usePaymentDetail';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {RADIO_DATA} from '@constants';
 import {Visitor} from '../domain/entities/payment-details';
 import {icons} from '@assets';
 import dayjs from 'dayjs';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Colors} from '@theme';
 
 const PaymentDetails = () => {
-  const {currentStep, orderDetail, setCurrentStep, getPaymentDetail} =
-    usePaymentDetail();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const {
+    currentStep,
+    orderDetail,
+    visitor,
+    selectedOrder,
+    setCurrentStep,
+    setSelectedOrder,
+    getPaymentDetail,
+  } = usePaymentDetail();
 
   useFocusEffect(
     useCallback(() => {
@@ -20,17 +38,6 @@ const PaymentDetails = () => {
       getPaymentDetail();
     }, []),
   );
-
-  const user = [
-    {
-      title: 'Mr.',
-      name: 'Jhon doe',
-    },
-    {
-      title: 'Mrs.',
-      name: 'Lea',
-    },
-  ];
 
   const checkIn = dayjs(orderDetail?.chosen_hotel_params?.check_in);
   const checkOut = dayjs(orderDetail?.chosen_hotel_params?.check_out);
@@ -46,19 +53,22 @@ const PaymentDetails = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <StatusBar backgroundColor={Colors.primary} barStyle={'light-content'} />
       <Stepper currentStep={currentStep} />
       <View style={styles.detailOrderContainer}>
         <Text style={styles.detailOrdertitle}>Detail Pesanan</Text>
 
         <View style={styles.cardDetailOrder}>
           <View style={styles.cardDetailOrderContent}>
-            <Image
-              source={{
-                uri: orderDetail?.chosen_hotel_detail?.images[0]?.thumbnail,
-              }}
-              style={styles.image}
-            />
+            {orderDetail?.chosen_hotel_detail?.images ? (
+              <Image
+                source={{
+                  uri: orderDetail?.chosen_hotel_detail?.images[0]?.thumbnail,
+                }}
+                style={styles.image}
+              />
+            ) : null}
             <View style={styles.detailOrder}>
               <Text style={styles.detailOrderName}>
                 {orderDetail?.chosen_hotel_detail?.hotel_name}
@@ -98,7 +108,11 @@ const PaymentDetails = () => {
         {orderDetail?.chosen_hotel_prices?.is_refundable ? (
           <View style={styles.refundContainer}>
             <View style={styles.refundContent}>
-              <Image source={icons.ic_reload} style={styles.refundIcon} />
+              <Image
+                source={icons.ic_reload}
+                tintColor={'orange'}
+                style={styles.refundIcon}
+              />
               <Text style={styles.refundText}>
                 Dapat direfund jika dibatalkan
               </Text>
@@ -113,8 +127,8 @@ const PaymentDetails = () => {
         <View style={styles.cardDetailOrdererContainer}>
           <View>
             <Text style={styles.name}>Tn. Andreas Andres</Text>
-            <Text style={styles.addionalData}>Tn. Andreas Andres</Text>
-            <Text style={styles.addionalData}>Tn. Andreas Andres</Text>
+            <Text style={styles.addionalData}>andreasandreas@gmail.com</Text>
+            <Text style={styles.addionalData}>+62832354358</Text>
           </View>
           <Pressable>
             <Text style={styles.editText}>Ubah</Text>
@@ -122,22 +136,34 @@ const PaymentDetails = () => {
         </View>
 
         <View style={styles.radioContainer}>
-          <Radio data={RADIO_DATA} onSelect={value => console.log(value)} />
+          <Radio
+            data={RADIO_DATA}
+            defaulValue={selectedOrder}
+            onSelect={value => setSelectedOrder(value)}
+          />
         </View>
 
         <View style={styles.visitorContainer}>
           <Text style={styles.detailOrdertitle}>Daftar Tamu</Text>
 
           <View style={styles.visitorContainer}>
-            <FlatList data={user} renderItem={renderVisitor} />
+            <FlatList
+              data={visitor}
+              nestedScrollEnabled
+              renderItem={renderVisitor}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(_, index) => index.toString()}
+            />
 
-            <Pressable style={styles.editVisitor}>
+            <Pressable
+              style={styles.editVisitor}
+              onPress={() => navigation.navigate('EditVisitor')}>
               <Text style={styles.editText}>Ubah data tamu</Text>
             </Pressable>
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -84,6 +84,8 @@ export interface Header {
 
 export interface PaymentDetailStore {
   currentStep: number;
+  visitor: Visitor[];
+  selectedOrder: string;
   orderDetail: ChosenHotel | null;
   actions: PaymentDetailActions;
 }
@@ -91,4 +93,6 @@ export interface PaymentDetailStore {
 export interface PaymentDetailActions {
   setCurrentStep: (value: number) => void;
   setOrderDetail: (data: ChosenHotel) => void;
+  setSelectedOrder: (option: string) => void;
+  setVisitor: (user: Visitor[]) => void;
 }

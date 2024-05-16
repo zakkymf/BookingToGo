@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 10,
-    backgroundColor: 'red',
   },
   detailOrder: {
     marginLeft: 10,
@@ -54,13 +53,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   refundContent: {
-    marginTop: 8,
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
   refundIcon: {
-    width: 18,
-    height: 18,
+    width: 14,
+    height: 14,
     marginRight: 10,
   },
   refundText: {

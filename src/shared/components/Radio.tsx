@@ -8,11 +8,12 @@ interface ItemProps {
 
 interface RadioProps {
   data: ItemProps[];
+  defaulValue: string;
   onSelect: (value: any) => void;
 }
 
-export const Radio: React.FC<RadioProps> = ({data, onSelect}) => {
-  const [userOption, setUserOption] = useState<string | null>(null);
+export const Radio: React.FC<RadioProps> = ({data, defaulValue, onSelect}) => {
+  const [userOption, setUserOption] = useState<string | null>(defaulValue);
 
   const onSelectHandler = (value: string) => {
     onSelect(value);
@@ -22,7 +23,7 @@ export const Radio: React.FC<RadioProps> = ({data, onSelect}) => {
   return (
     <>
       {data?.map(item => (
-        <View style={styles.container}>
+        <View key={item.value?.toString()} style={styles.container}>
           <Pressable
             style={StyleSheet.flatten([
               styles.bullet,

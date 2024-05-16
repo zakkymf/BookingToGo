@@ -5,8 +5,10 @@ import {
 } from './store/usePaymentDetailStore';
 
 export function usePaymentDetail() {
-  const {currentStep, orderDetail} = usePaymentDetailStore();
-  const {setCurrentStep, setOrderDetail} = usePaymentDetailActions();
+  const {currentStep, orderDetail, visitor, selectedOrder} =
+    usePaymentDetailStore();
+  const {setCurrentStep, setOrderDetail, setVisitor, setSelectedOrder} =
+    usePaymentDetailActions();
 
   const {getDetailOrderUseCase} = paymentDetailContainer.usecases();
 
@@ -22,7 +24,11 @@ export function usePaymentDetail() {
   return {
     currentStep,
     orderDetail,
+    visitor,
+    selectedOrder,
     setCurrentStep,
+    setVisitor,
+    setSelectedOrder,
     getPaymentDetail,
   };
 }
